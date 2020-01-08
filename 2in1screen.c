@@ -25,6 +25,7 @@ double accel_y = 0.0,
 int current_state = 0;
 
 int rotation_changed(){
+	sprintf(stderr, "accel_x%s, accel_y=%s", accel_x, accel_y);
 	int state = 0;
 
 	if(accel_y < -accel_g) state = 0;
@@ -58,7 +59,7 @@ FILE* bdopen(char const *fname, char leave_open){
 void rotate_screen(){
 	sprintf(command, "xrandr -o %s", ROT[current_state]);
 	system(command);
-	sprintf(command, "xinput set-prop \"%s\" \"Coordinate Transformation Matrix\" %s", "Wacom HID 4846 Finger", COOR[current_state]);
+	sprintf(command, "xinput set-prop \"%s\" \"Coordinate Transformation Matrix\" %s", "silead_ts", COOR[current_state]);
 	system(command);
 }
 
